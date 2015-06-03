@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration name="log4jTest" status="OFF">
+    <appenders>
+            <RollingFile name="rolling-file" fileName="logs/log4jExample.log" filePattern="logs/$${date:yyyy-MM}/log4jExample-%d{MM-dd-yyyy}-%i.log.gz">
+		<PatternLayout>
+                <pattern>%d{ABSOLUTE} [%t] %-5p %c{1} - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="debug">
+            <appender-ref ref="rolling-file"/>
+        </root>
+        <logger name="org.hibernate" level="info">
+            <appender-ref ref="rolling-file"/>
+        </logger>
+    </loggers>
+</configuration>
